@@ -15,7 +15,7 @@ class Like(restful.Resource):
     def get(self):
         matches = config.session.query(Match).filter(
             (Match.match_from_id == self.user.id) |
-            (Match.match_to_id == self.user.id)).all()
+            ((Match.match_to_id == self.user.id) & (Match.mutual == True))).all()
 
         return map(lambda m: {
                 'other': m.match_to_id if m.match_from_id == self.user.id else m.match_from_id,
