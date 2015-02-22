@@ -4,9 +4,12 @@ import uuid
 import time
 
 events = Table('blindr_events', schema=[
-    HashKey('dest'),
+    HashKey('dst'),
     RangeKey('sent_at')
-], global_indexes=[])
+], throughput={
+    'read': 1,
+    'write': 1
+}, global_indexes=[])
 
 class Event(object):
 
@@ -19,7 +22,7 @@ class Event(object):
     @staticmethod
     def fetch(user, city, since):
         resultset = events.scan(
-            dest__in=[
+            dst__in=[
                 'user:{}'.format(user),
                 'city:{}'.format(city)
             ],
