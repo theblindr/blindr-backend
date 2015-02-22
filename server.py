@@ -1,5 +1,6 @@
-from flask import Flask, request
+from flask import Flask, request, abort
 from flask.ext import restful
+import requests
 import itsdangerous
 
 from api import *
@@ -16,10 +17,18 @@ class Me(restful.Resource):
 class Auth(restful.Resource):
     def post(self):
         fb_token = request.form.get('fb_token')
+
         # Request user from fb_token
-        id = '0'
-        s = itsdangerous.Signer(config.secret)
-        return {'token': s.sign(id)}
+        r = requests.get('https://graph.facebook.com/v2.2/me/?access_token=%s' % fb_token)
+        if r.status_code == 200: #good
+            jsonObj = r.json()
+            if "id" in jsonObj:
+                s = itsdangerous.Signer(config.secret)
+                return {'token': s.sign(jsonObj["id"])}
+            else:
+                abort(500)
+        else:
+            abort(401)
 
 api.add_resource(Me, '/me')
 api.add_resource(Auth, '/auth')
