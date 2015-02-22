@@ -3,7 +3,7 @@ from authenticate import authenticate
 from flask import request, abort, jsonify
 import time
 from itertools import permutations
-
+from sqlalchemy.exc import IntegrityError
 
 import config
 from models import Event
@@ -30,16 +30,21 @@ class Like(restful.Resource):
             }
 
             for (dst, src) in permutations(participants):
-                Event.create(base.update({
-                    'dst': dst,
+                base.update({
+                    'dst': 'user:{}'.format(dst),
                     'src': src
-                }))
+                })
+                Event.create(base)
 
             match.mutual = True
         else:
-            match = Match(match_from_id= self.user.id, match_to_id= dst_id)
-            session.add(match)
+            try:
+                match = Match(match_from_id= self.user.id, match_to_id= dst_id)
+                session.add(match)
+                session.commit()
+            except IntegrityError:
+                abort(500)
 
-        session.commit()
+
 
         return jsonify(status="ok")
