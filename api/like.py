@@ -12,6 +12,16 @@ from models import User, Match
 class Like(restful.Resource):
     method_decorators=[authenticate]
 
+    def get(self):
+        matches = config.session.query(Match).filter(
+            (Match.match_from_id == self.user.id) |
+            (Match.match_to_id == self.user.id)).all()
+
+        return map(lambda m: {
+                'other': m.match_to_id if m.match_from_id == self.user.id else m.match_from_id,
+                'mutual': bool(m.mutual)
+            }, matches)
+
     def post(self):
         # Create DB Match entry
         dst_id = request.form.get('dst_user')
