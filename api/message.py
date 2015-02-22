@@ -28,6 +28,7 @@ class Message(restful.Resource):
                 'type': 'message',
                 'dst': dst,
                 'src': self.user.id,
+                'src_gender': self.user.gender,
                 'message': message
         }
 
