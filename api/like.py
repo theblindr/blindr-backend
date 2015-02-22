@@ -31,7 +31,7 @@ class Like(restful.Resource):
 
             for (dst, src) in permutations(participants):
                 base.update({
-                    'dst': dst,
+                    'dst': 'user:{}'.format(dst),
                     'src': src
                 })
                 Event.create(base)
