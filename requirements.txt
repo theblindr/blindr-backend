@@ -1,5 +1,6 @@
 aniso8601==0.92
 boto==2.36.0
+facebook-sdk==0.4.0
 Flask==0.10.1
 Flask-RESTful==0.3.1
 gunicorn==19.2.1
