@@ -14,7 +14,7 @@ class Message(restful.Resource):
         message = request.form.get('message')
         dst = None
         if dst_city:
-            dst = 'city:{}'.format(dst_city)
+            dst = 'city:{}'.format(dst_city.lower())
         elif dst_user:
             dst = 'user:{}'.format(dst_user)
 
