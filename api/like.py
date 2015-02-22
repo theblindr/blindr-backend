@@ -17,10 +17,22 @@ class Like(restful.Resource):
             (Match.match_from_id == self.user.id) |
             ((Match.match_to_id == self.user.id) & (Match.mutual == True))).all()
 
-        return map(lambda m: {
-                'other': m.match_to_id if m.match_from_id == self.user.id else m.match_from_id,
-                'mutual': bool(m.mutual)
-            }, matches)
+        match_list = []
+        for match in matches:
+            other_id = match.match_to_id if match.match_from_id == self.user.id else match.match_from_id,
+            other = config.session.query(User).filter(User.id==other_id).first()
+            match_data = {
+                'other': other.id,
+                'other_fake_name': other.fake_name,
+                'mutual': bool(match.mutual)
+            }
+
+            if match.mutual:
+                match_data['other_real_name'] = other.real_name
+
+            match_list.append(match_data)
+
+        return match_list
 
     def post(self):
         # Create DB Match entry
