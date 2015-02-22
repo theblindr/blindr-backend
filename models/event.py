@@ -21,8 +21,8 @@ class Event(object):
         return events.put_item(data=data)
 
     @staticmethod
-    def fetch(user=None, city=None, since=15):
-        adjusted_since = since - 15
+    def fetch(user=None, city=None, since=60):
+        adjusted_since = since - 60
         dst = ''
 
         if user:
