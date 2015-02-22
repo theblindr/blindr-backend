@@ -7,8 +7,8 @@ Base = declarative_base()
 class Match(Base):
     __tablename__ = 'matches'
 
-    match_from_id = 	Column(Integer, ForeignKey('users.id'))
-    match_to_id =	Column(Integer, ForeignKey('users.id'))
+    match_from_id = 	Column(String, ForeignKey('users.id'))
+    match_to_id =	Column(String, ForeignKey('users.id'))
     mutual =		Column(Boolean)
 
     __table_args__ = (PrimaryKeyConstraint('match_from_id', 'match_to_id'),)
