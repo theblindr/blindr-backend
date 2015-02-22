@@ -16,8 +16,7 @@ class Events(restful.Resource):
                 city= request.args.get('city'),
                 since= last_poll_at)
 
-        self.user.last_poll_at = datetime.utcnow()
-        import pdb;pdb.set_trace()
+        self.user.last_poll = datetime.utcnow()
         config.session.add(self.user)
         config.session.commit()
 
