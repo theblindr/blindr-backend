@@ -18,6 +18,7 @@ class User(config.Base):
 
     OAuth = 	Column(String)
     fake_name =	Column(String(50), nullable = False)
+    real_name =	Column(String(50))
     gender =	Column(CHAR, nullable = False)
     last_poll =	Column(TIMESTAMP)
 
@@ -33,6 +34,7 @@ class User(config.Base):
             user = User(id= fb_user['id'],
                     OAuth= fb_token,
                     fake_name= name_generator.generate_name(),
+                    real_name= fb_user['name'],
                     gender= fb_gender_map[fb_user['gender'] or 'male'],
                     last_poll= datetime.utcnow())
 
@@ -42,6 +44,7 @@ class User(config.Base):
             user.OAuth= fb_token
             user.gender= fb_gender_map[fb_user['gender'] or 'male']
             user.last_poll= datetime.utcnow()
+            user.real_name= fb_user['name']
 
         session.commit()
         return user

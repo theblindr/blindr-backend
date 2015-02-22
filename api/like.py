@@ -27,22 +27,27 @@ class Like(restful.Resource):
         dst_id = request.form.get('dst_user')
         session = config.session
 
+        other = session.query(User).filter(User.id==dst_id).first()
+        if not other:
+            abort(422)
+
         # Target already liked, trigger "match"
         match = session.query(Match).filter_by(
                 match_from_id= dst_id,
                 match_to_id= self.user.id).first()
 
         if match:
-            participants = sorted([self.user.id, dst_id])
+            participants = sorted([self.user, other])
             base = {
                 'type': 'match',
-                'participants': '{}:{}'.format(*participants)
+                'participants': '{}:{}'.format(*[p.id for p in participants])
             }
 
             for (dst, src) in permutations(participants):
                 base.update({
-                    'dst': 'user:{}'.format(dst),
-                    'src': src
+                    'dst': 'user:{}'.format(dst.id),
+                    'src': src.id,
+                    'src_real_name': src.real_name
                 })
                 Event.create(base)
 

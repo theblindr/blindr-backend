@@ -3,7 +3,8 @@ from authenticate import authenticate
 from flask import request, abort
 import time
 
-from models import Event
+from models import Event, User
+import config
 
 class Message(restful.Resource):
     method_decorators=[authenticate]
@@ -34,6 +35,7 @@ class Message(restful.Resource):
 
         if dst_user:
             data['participants'] = '{}:{}'.format(*sorted([self.user.id,dst_user]))
+            data['src_real_name'] = self.user.real_name
         else:
             data['src_fake_name'] = self.user.fake_name
 
