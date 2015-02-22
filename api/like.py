@@ -30,10 +30,11 @@ class Like(restful.Resource):
             }
 
             for (dst, src) in permutations(participants):
-                Event.create(base.update({
+                base.update({
                     'dst': dst,
                     'src': src
-                }))
+                })
+                Event.create(base)
 
             match.mutual = True
         else:
