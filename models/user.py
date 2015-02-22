@@ -37,6 +37,11 @@ class User(config.Base):
                     last_poll= datetime.utcnow())
 
             session.add(user)
-            session.commit()
 
+        else:
+            user.OAuth= fb_token
+            user.gender= fb_gender_map[fb_user['gender'] or 'male']
+            user.last_poll= datetime.utcnow()
+
+        session.commit()
         return user
