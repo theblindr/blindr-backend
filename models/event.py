@@ -2,6 +2,7 @@ from boto.dynamodb2.table import Table
 from boto.dynamodb2.fields import HashKey, RangeKey, GlobalAllIndex
 import uuid
 import time
+from datetime import timedelta
 
 events = Table('blindr_events', schema=[
     HashKey('dst'),
@@ -21,12 +22,13 @@ class Event(object):
 
     @staticmethod
     def fetch(user, city, since):
+        adjusted_since = since - 15
         resultset = events.scan(
             dst__in=[
                 'user:{}'.format(user),
                 'city:{}'.format(city)
             ],
-            sent_at__gte=since)
+            sent_at__gte=adjusted_since)
 
         items = [dict(item) for item in resultset]
         for item in items:

@@ -4,10 +4,14 @@ from flask import request, abort
 import time
 
 from models import Event
+import utils
 
 class Events(restful.Resource):
     method_decorators=[authenticate]
     def get(self):
-        # Get events since last poll
-        return Event.fetch('1','montreal', 1424558599)
+        last_poll_at = utils.timestamp(self.user.last_poll)
+        return Event.fetch(
+                user= self.user.id,
+                city= request.args.get('city'),
+                since= last_poll_at)
 
