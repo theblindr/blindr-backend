@@ -23,9 +23,11 @@ class Events(restful.Resource):
             events += Event.fetch(city= city.lower(),
                     since= time.time())
 
-            events = sorted(events, key=lambda i: i['sent_at'])
+            events = sorted(events, key=lambda e: e['sent_at'])
 
         self.user.last_poll = datetime.utcnow()
         config.session.commit()
+
+        events = filter(lambda e: e['src'] != self.user.id, events)
 
         return events
