@@ -48,13 +48,13 @@ class Like(restful.Resource):
 
             match.mutual = True
         else:
-            try:
-                match = Match(match_from_id= self.user.id, match_to_id= dst_id)
-                session.add(match)
-                session.commit()
-            except IntegrityError:
-                abort(500)
+            match = Match(match_from_id= self.user.id, match_to_id= dst_id)
+            session.add(match)
 
 
+        try:
+            session.commit()
+        except IntegrityError:
+            abort(500)
 
         return jsonify(status="ok")

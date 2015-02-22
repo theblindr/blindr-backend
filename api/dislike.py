@@ -1,6 +1,6 @@
 from flask.ext import restful
 from authenticate import authenticate
-from flask import request, abort, jsonify
+from flask import request, abort
 import time
 
 
@@ -17,12 +17,11 @@ class Dislike(restful.Resource):
         session = config.session
 
         # User unliking previously like target. Remove row.
-        match = session.query(Match).filter_by(match_from_id="%s" % self.user.id, match_to_id="%s" % dst_id).first()
-        if match is not None: # Prior like, remove & send ignore callback
-            session.delete(match)
-        else: # first dislike, send ignore callback
-            pass
+        session.query(Match).filter(
+            ((Match.match_from_id == self.user.id) & (Match.match_to_id == dst_id)) |
+            ((Match.match_from_id == dst_id) & (Match.match_to_id == self.user.id))).delete()
 
         session.commit()
-        return jsonify(ignore="%s" % dst_id)         
-        
+
+        return {'ignore': dst_id}
+
