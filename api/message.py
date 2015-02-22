@@ -27,7 +27,7 @@ class Message(restful.Resource):
         data = {
                 'type': 'message',
                 'dst': dst,
-                'src': self.user,
+                'src': self.user.id,
                 'message': message
         }
         success = Event.create(data)

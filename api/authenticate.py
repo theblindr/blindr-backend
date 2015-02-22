@@ -3,18 +3,21 @@ from flask import request, abort
 from functools import wraps
 
 import config
+from models import User
 
 def token_authentication(token):
     if not token:
         return False
 
     s = itsdangerous.Signer(config.secret)
-    user = False
+    user_id = False
     try:
-        user = s.unsign(token)
+        user_id = s.unsign(token)
     except itsdangerous.BadSignature:
         pass
-    return user
+
+    session = config.Session()
+    return session.query(User).filter_by(id=user_id).first()
 
 def authenticate(func):
     @wraps(func)

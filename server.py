@@ -11,7 +11,7 @@ api = restful.Api(app)
 class Me(restful.Resource):
     method_decorators=[authenticate]
     def get(self):
-        return {'id': self.user}
+        return {'id': self.user.id}
 
 class Auth(restful.Resource):
     def post(self):
