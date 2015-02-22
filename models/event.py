@@ -39,4 +39,15 @@ class Event(object):
 
         return sorted(items, key=lambda i: i['sent_at'])
 
+    @staticmethod
+    def fetch_history(user, other):
+        resultset = events.query_2(
+            participants__eq= '{}:{}'.format(*sorted([user,other])),
+            index= 'participants-index')
+
+        items = [dict(item) for item in resultset]
+        for item in items:
+            item['sent_at'] = float(item['sent_at'])
+
+        return items
 

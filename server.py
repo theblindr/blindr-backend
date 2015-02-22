@@ -33,6 +33,7 @@ api.add_resource(Auth, '/auth')
 api.add_resource(Events, '/events')
 api.add_resource(Message, '/events/message')
 api.add_resource(Like, '/events/like')
+api.add_resource(History, '/events/<string:other_id>')
 
 if __name__ == '__main__':
     app.run(debug=True)

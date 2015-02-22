@@ -30,6 +30,10 @@ class Message(restful.Resource):
                 'src': self.user.id,
                 'message': message
         }
+
+        if dst_user:
+            data['participants'] = '{}:{}'.format(*sorted([self.user.id,dst_user]))
+
         success = Event.create(data)
 
         if not success:
