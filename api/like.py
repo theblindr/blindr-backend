@@ -5,9 +5,9 @@ import time
 
 from models import Event
 
-class Events(restful.Resource):
+class Like(restful.Resource):
     method_decorators=[authenticate]
-    def get(self):
-        # Get events since last poll
-        return Event.fetch('1','montreal', 1424558599)
 
+    def post(self):
+        # Create DB Match entry
+        pass

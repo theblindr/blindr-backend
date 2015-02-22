@@ -10,9 +10,9 @@ app = Flask(__name__)
 api = restful.Api(app)
 
 class Me(restful.Resource):
-    method_decorators=[authenticate.authenticate]
+    method_decorators=[authenticate]
     def get(self):
-        return {'id': self.user}
+        return {'id': self.user.id}
 
 class Auth(restful.Resource):
     def post(self):
@@ -32,7 +32,9 @@ class Auth(restful.Resource):
 
 api.add_resource(Me, '/me')
 api.add_resource(Auth, '/auth')
-api.add_resource(events.Events, '/events')
+api.add_resource(Events, '/events')
+api.add_resource(Message, '/events/message')
+api.add_resource(Like, '/events/like')
 
 if __name__ == '__main__':
     app.run(debug=True)
