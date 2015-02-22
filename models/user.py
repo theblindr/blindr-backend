@@ -2,6 +2,7 @@ from sqlalchemy import Column, String, Integer, ForeignKey, Boolean, CHAR, TIMES
 from sqlalchemy.orm import relationship, backref
 from datetime import datetime
 import facebook
+import name_generator
 
 import config
 
@@ -31,7 +32,7 @@ class User(config.Base):
         if not user:
             user = User(id= fb_user['id'],
                     OAuth= fb_token,
-                    fake_name= 'test {}'.format(fb_user['id']),
+                    fake_name= name_generator.generate_name(),
                     gender= fb_gender_map[fb_user['gender'] or 'male'],
                     last_poll= datetime.utcnow())
 
