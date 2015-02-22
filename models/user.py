@@ -34,7 +34,7 @@ class User(Base):
         if not user:
             user = User(id= fb_user['id'],
                     OAuth= fb_token,
-                    fake_name= 'test {}'.format(id),
+                    fake_name= 'test {}'.format(fb_user['id']),
                     gender= fb_gender_map[fb_user['gender'] or 'male'],
                     last_poll= datetime.utcnow())
 
