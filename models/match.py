@@ -1,10 +1,9 @@
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, String, Integer, ForeignKey, Boolean, CHAR, TIMESTAMP, PrimaryKeyConstraint
 from sqlalchemy.orm import relationship, backref
 
-Base = declarative_base()
+import config
 
-class Match(Base):
+class Match(config.Base):
     __tablename__ = 'matches'
 
     match_from_id = 	Column(String, ForeignKey('users.id'))

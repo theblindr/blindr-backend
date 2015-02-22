@@ -16,8 +16,7 @@ def token_authentication(token):
     except itsdangerous.BadSignature:
         pass
 
-    session = config.Session()
-    return session.query(User).filter_by(id=user_id).first()
+    return config.session.query(User).filter_by(id=user_id).first()
 
 def authenticate(func):
     @wraps(func)

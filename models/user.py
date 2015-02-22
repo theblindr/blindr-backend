@@ -1,4 +1,3 @@
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, String, Integer, ForeignKey, Boolean, CHAR, TIMESTAMP
 from sqlalchemy.orm import relationship, backref
 from datetime import datetime
@@ -6,14 +5,12 @@ import facebook
 
 import config
 
-Base = declarative_base()
-
 fb_gender_map = {
     'male': 'm',
     'female': 'f'
 }
 
-class User(Base):
+class User(config.Base):
     __tablename__ = 'users'
 
     id =	Column(String, primary_key=True)
@@ -29,7 +26,7 @@ class User(Base):
         graph = facebook.GraphAPI(access_token=fb_token)
         fb_user = graph.get_object(id='me')
 
-        session = config.Session()
+        session = config.session
         user = session.query(User).filter_by(id=fb_user['id']).first()
         if not user:
             user = User(id= fb_user['id'],

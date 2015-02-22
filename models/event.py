@@ -21,13 +21,16 @@ class Event(object):
         return events.put_item(data=data)
 
     @staticmethod
-    def fetch(user, city, since):
+    def fetch(user=None, city=None, since=15):
         adjusted_since = since - 15
+        filters = []
+        if user:
+            filters.append('user:{}'.format(user))
+        if city:
+            filters.append('city:{}'.format(city))
+
         resultset = events.scan(
-            dst__in=[
-                'user:{}'.format(user),
-                'city:{}'.format(city)
-            ],
+            dst__in=filters,
             sent_at__gte=adjusted_since)
 
         items = [dict(item) for item in resultset]

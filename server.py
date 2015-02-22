@@ -24,6 +24,9 @@ class Auth(restful.Resource):
         s = itsdangerous.Signer(config.secret)
         return {'token': s.sign(user.id)}
 
+@app.teardown_appcontext
+def shutdown_session(exception=None):
+    config.session.remove()
 
 api.add_resource(Me, '/me')
 api.add_resource(Auth, '/auth')
