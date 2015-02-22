@@ -26,7 +26,7 @@ class Like(restful.Resource):
             participants = sorted([self.user.id, dst_id])
             base = {
                 'type': 'match',
-                'participants': '{}:{}'.format(participants)
+                'participants': '{}:{}'.format(*participants)
             }
 
             for (dst, src) in permutations(participants):
