@@ -23,21 +23,22 @@ class Event(object):
     @staticmethod
     def fetch(user=None, city=None, since=15):
         adjusted_since = since - 15
-        filters = []
-        if user:
-            filters.append('user:{}'.format(user))
-        if city:
-            filters.append('city:{}'.format(city))
+        dst = ''
 
-        resultset = events.scan(
-            dst__in=filters,
+        if user:
+            dst = 'user:{}'.format(user)
+        if city:
+            dst = 'city:{}'.format(city)
+
+        resultset = events.query_2(
+            dst__eq=dst,
             sent_at__gte=adjusted_since)
 
         items = [dict(item) for item in resultset]
         for item in items:
             item['sent_at'] = float(item['sent_at'])
 
-        return sorted(items, key=lambda i: i['sent_at'])
+        return items
 
     @staticmethod
     def fetch_history(user, other):
