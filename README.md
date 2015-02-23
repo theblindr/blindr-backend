@@ -1,5 +1,6 @@
 # blindr-backend
 Backend for [blindr](https://github.com/ldionmarcil/blindr).
+Developped in 24h for the [McHacks](http://mchacks.io/) hackathon.
 
 ## Features
 
