@@ -1,5 +1,5 @@
 # blindr-backend
-Backend for blindr.
+Backend for [blindr](https://github.com/ldionmarcil/blindr).
 
 ## Features
 
