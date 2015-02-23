@@ -11,3 +11,10 @@ Backend for blindr.
  * Store users and matches in Postgres
  * Run on Heroku
 
+## Setup
+
+1. Create DynamoDB table with same schema as `models/events`
+2. Install and Setup Boto https://github.com/boto/boto#getting-started-with-boto
+3. Set the database connection string with `export DATABASE_URL={YOUR_CONNECTION_STRING}`
+4. Create SQL table with `python database/setup.py`
+5. Run the app with `foreman start`
