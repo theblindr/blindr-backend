@@ -59,7 +59,8 @@ class Like(restful.Resource):
                 base.update({
                     'dst': 'user:{}'.format(dst.id),
                     'src': src.id,
-                    'src_real_name': src.real_name
+                    'src_real_name': src.real_name,
+                    'src_fake_name': src.fake_name
                 })
                 Event.create(base)
 
