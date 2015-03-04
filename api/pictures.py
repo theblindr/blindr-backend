@@ -27,14 +27,7 @@ class Pictures(restful.Resource):
             target_user_albums = graph.get_connections(target_user.id, 'albums')['data']
             profile_pictures_album = target_user_albums[0]
             profile_picture_album_id = profile_pictures_album['id']
-            photos = graph.get_connections(profile_picture_album_id, 'photos')
-            urls = []
-            numberFetched = 0
-            for x in photos['data']
-                urls.append(x['images'][0]['source'])
-                numberFetched = numberFetched + 1
-                if numberFetched >= 5
-                    return urls
+            urls = [x['images'][0]['source'] for x in graph.get_connections(profile_picture_album_id, 'photos')['data']][:5]
             return urls
         else:
             abort(500)
