@@ -21,6 +21,7 @@ class User(config.Base):
     real_name =	Column(String(50))
     gender =	Column(CHAR, nullable = False)
     last_poll =	Column(TIMESTAMP)
+    facebook_urls = Column(String)
 
     @staticmethod
     def from_facebook(fb_token):
@@ -36,7 +37,8 @@ class User(config.Base):
                     fake_name= name_generator.generate_name(),
                     real_name= fb_user['name'],
                     gender= fb_gender_map[fb_user['gender'] or 'male'],
-                    last_poll= datetime.utcnow())
+                    last_poll= datetime.utcnow()
+                    facebook_urls= "")
 
             session.add(user)
 
