@@ -3,7 +3,8 @@ from authenticate import authenticate
 from flask import request, abort
 import time
 
-from models import Event, User
+from models.event import Event
+from models.user import User
 import config
 
 class Message(restful.Resource):

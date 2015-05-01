@@ -5,8 +5,9 @@ import time
 
 
 import config
-from models import Event
-from models import User, Match
+from models.event import Event
+from models.match import Match
+from models.user import User
 
 class Dislike(restful.Resource):
     method_decorators=[authenticate]
