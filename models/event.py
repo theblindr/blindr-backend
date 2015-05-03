@@ -41,10 +41,11 @@ class Event(object):
         return items
 
     @staticmethod
-    def fetch_history(user, other):
+    def fetch_history(user, other,since=0):
         resultset = events.query_2(
             participants__eq= '{}:{}'.format(*sorted([user,other])),
-            index= 'participants-index')
+            index= 'participants-index',
+            sent_at__gte=since)
 
         items = [dict(item) for item in resultset]
         for item in items:
