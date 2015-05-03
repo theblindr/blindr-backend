@@ -13,7 +13,6 @@ class Events(restful.Resource):
 
     def get(self):
         city = request.args.get('city')
-        interested_in = request.args.get('interested_in')
 
         last_poll_at = utils.timestamp(self.user.last_poll)
         events = Event.fetch(
@@ -30,6 +29,5 @@ class Events(restful.Resource):
         config.session.commit()
 
         events = filter(lambda e: e['src'] != self.user.id, events)
-        events = filter(lambda e: e['src_gender'] in interested_in, events)
 
         return events
