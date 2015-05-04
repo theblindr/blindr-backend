@@ -12,3 +12,4 @@ api.add_resource(like.Like, '/events/like')
 api.add_resource(dislike.Dislike, '/events/dislike')
 api.add_resource(pictures.Pictures, '/events/pictures')
 api.add_resource(history.History, '/events/<string:other_id>')
+
