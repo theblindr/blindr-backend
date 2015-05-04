@@ -1,13 +1,19 @@
 from flask import Flask, request, abort
+from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext import restful
 import itsdangerous
-
-from api import *
-from models.user import User
 import config
 
 app = Flask(__name__)
-api = restful.Api(app)
+app.config.from_object('config')
+
+db = SQLAlchemy(app)
+
+import boto
+boto.config.load_from_path('./boto.cfg')
+
+from .api import *
+from .models.user import User
 
 class Me(restful.Resource):
     method_decorators=[authenticate]
@@ -30,6 +36,8 @@ class Auth(restful.Resource):
 def shutdown_session(exception=None):
     config.session.remove()
 
+api = restful.Api(app)
+
 api.add_resource(Me, '/me')
 api.add_resource(Auth, '/auth')
 api.add_resource(Events, '/events')
@@ -39,5 +47,3 @@ api.add_resource(Dislike, '/events/dislike')
 api.add_resource(Pictures, '/events/pictures')
 api.add_resource(History, '/events/<string:other_id>')
 
-if __name__ == '__main__':
-    app.run(debug=True)

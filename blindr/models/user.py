@@ -2,7 +2,8 @@ from sqlalchemy import Column, String, Integer, ForeignKey, Boolean, CHAR, TIMES
 from sqlalchemy.orm import relationship, backref
 from datetime import datetime
 import facebook
-import name_generator
+import blindr.name_generator
+from blindr import db
 
 import config
 
@@ -11,7 +12,7 @@ fb_gender_map = {
     'female': 'f'
 }
 
-class User(config.Base):
+class User(db.Model):
     __tablename__ = 'users'
 
     id =	Column(String, primary_key=True)
@@ -37,7 +38,7 @@ class User(config.Base):
                     fake_name= name_generator.generate_name(),
                     real_name= fb_user['name'],
                     gender= fb_gender_map[fb_user['gender'] or 'male'],
-                    last_poll= datetime.utcnow()
+                    last_poll= datetime.utcnow(),
                     facebook_urls= "")
 
             session.add(user)

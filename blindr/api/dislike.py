@@ -1,13 +1,13 @@
 from flask.ext import restful
-from authenticate import authenticate
+from .authenticate import authenticate
 from flask import request, abort
 import time
 
 
 import config
-from models.event import Event
-from models.match import Match
-from models.user import User
+from blindr.models.event import Event
+from blindr.models.match import Match
+from blindr.models.user import User
 
 class Dislike(restful.Resource):
     method_decorators=[authenticate]

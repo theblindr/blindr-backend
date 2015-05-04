@@ -1,9 +1,9 @@
 from sqlalchemy import Column, String, Integer, ForeignKey, Boolean, CHAR, TIMESTAMP, PrimaryKeyConstraint
 from sqlalchemy.orm import relationship, backref
+from blindr import db
 
-import config
 
-class Match(config.Base):
+class Match(db.Model):
     __tablename__ = 'matches'
 
     match_from_id = 	Column(String, ForeignKey('users.id'))

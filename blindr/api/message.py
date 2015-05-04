@@ -1,10 +1,10 @@
 from flask.ext import restful
-from authenticate import authenticate
+from .authenticate import authenticate
 from flask import request, abort
 import time
 
-from models.event import Event
-from models.user import User
+from blindr.models.event import Event
+from blindr.models.user import User
 import config
 
 class Message(restful.Resource):
