@@ -3,7 +3,7 @@ from flask import request, abort
 from functools import wraps
 
 import config
-from models import User
+from models.user import User
 
 def token_authentication(token):
     if not token:

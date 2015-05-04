@@ -6,8 +6,9 @@ from itertools import permutations
 from sqlalchemy.exc import IntegrityError
 
 import config
-from models import Event
-from models import User, Match
+from models.event import Event
+from models.match import Match
+from models.user import User
 
 class Like(restful.Resource):
     method_decorators=[authenticate]

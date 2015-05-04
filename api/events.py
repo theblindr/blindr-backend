@@ -4,7 +4,7 @@ from flask import request, abort
 from datetime import datetime
 import time
 
-from models import Event
+from models.event import Event
 import utils
 import config
 

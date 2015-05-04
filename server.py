@@ -1,10 +1,9 @@
 from flask import Flask, request, abort
 from flask.ext import restful
-import requests
 import itsdangerous
 
 from api import *
-from models import User
+from models.user import User
 import config
 
 app = Flask(__name__)

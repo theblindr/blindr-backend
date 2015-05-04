@@ -7,15 +7,16 @@ from sqlalchemy.exc import IntegrityError
 import facebook
 
 import config
-from models import Event
-from models import User, Match
+from models.event import Event
+from models.user import User
+from models.match import Match
 
 class Pictures(restful.Resource):
     method_decorators=[authenticate]
 
     def get(self):
         typeReq = request.args.get('typeReq')
-        
+
         if typeReq == 'slideshow':
             dst_id = request.args.get('dst_id')
             user = config.session.query(User).filter(
