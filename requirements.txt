@@ -1,13 +1,17 @@
 aniso8601==0.92
 boto==2.38.0
+facebook-sdk==0.4.0
+factory-boy==2.5.2
 Flask==0.10.1
 Flask-RESTful==0.3.2
+Flask-SQLAlchemy==2.0
 freezegun==0.3.2
 itsdangerous==0.24
 Jinja2==2.7.3
 MarkupSafe==0.23
 python-dateutil==2.4.2
 pytz==2015.2
+requests==2.7.0
 six==1.9.0
 SQLAlchemy==1.0.3
 Werkzeug==0.10.4
