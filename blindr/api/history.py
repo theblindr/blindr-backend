@@ -1,8 +1,8 @@
 from flask.ext import restful
-from authenticate import authenticate
+from .authenticate import authenticate
 from flask import request, abort
 
-from models.event import Event
+from blindr.models.event import Event
 
 class History(restful.Resource):
     method_decorators=[authenticate]

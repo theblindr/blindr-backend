@@ -1,14 +1,14 @@
 from flask.ext import restful
-from authenticate import authenticate
+from .authenticate import authenticate
 from flask import request, abort, jsonify
 import time
 from itertools import permutations
 from sqlalchemy.exc import IntegrityError
 
 import config
-from models.event import Event
-from models.match import Match
-from models.user import User
+from blindr.models.event import Event
+from blindr.models.match import Match
+from blindr.models.user import User
 
 class Like(restful.Resource):
     method_decorators=[authenticate]

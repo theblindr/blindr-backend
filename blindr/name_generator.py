@@ -1,7 +1,7 @@
 import random
 
-nouns = tuple(open('data/nouns.txt', 'r'))
-adjectives = tuple(open('data/adjectives.txt', 'r'))
+nouns = tuple(open('blindr/data/nouns.txt', 'r'))
+adjectives = tuple(open('blindr/data/adjectives.txt', 'r'))
 
 def generate_name():
     noun = random.choice(nouns).strip()

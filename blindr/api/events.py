@@ -1,11 +1,11 @@
 from flask.ext import restful
-from authenticate import authenticate
+from .authenticate import authenticate
 from flask import request, abort
 from datetime import datetime
 import time
 
-from models.event import Event
-import utils
+from blindr.models.event import Event
+import blindr.utils
 import config
 
 class Events(restful.Resource):

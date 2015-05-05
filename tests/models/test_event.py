@@ -1,10 +1,11 @@
 import tests.utils.fake_dynamodb
 import unittest
 from unittest.mock import MagicMock
-from models.event import Event, events
 from freezegun import freeze_time
 import time
 import boto
+
+from blindr.models.event import Event, events
 
 class EventTests(unittest.TestCase):
     def test_create(self):
