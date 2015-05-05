@@ -7,7 +7,7 @@ class UserFactory(factory.alchemy.SQLAlchemyModelFactory):
         model = User
         sqlalchemy_session = db.session
 
-    id = factory.Sequence(lambda n: n)
+    id = factory.Sequence(lambda n: str(n))
 
     fake_name = 'Fakename'
     real_name = 'Realname'
