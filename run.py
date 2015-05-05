@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from blindr import create_app
 import config
 
