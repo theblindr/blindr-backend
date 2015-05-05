@@ -1,20 +1,19 @@
 from flask import Flask, request, abort
 from flask.ext.sqlalchemy import SQLAlchemy
-import itsdangerous
-import config
 
-app = Flask(__name__)
-app.config.from_object('config')
+db = SQLAlchemy()
 
-db = SQLAlchemy(app)
+def create_app(config):
+    global db
 
-import boto
-boto.config.load_from_path('./boto.cfg')
+    app = Flask(__name__)
+    app.config.from_object(config)
 
-import blindr.api
+    db.init_app(app)
 
-@app.teardown_appcontext
-def shutdown_session(exception=None):
-    config.session.remove()
+    from blindr.api import Api
+    Api(app)
+
+    return app
 
 
