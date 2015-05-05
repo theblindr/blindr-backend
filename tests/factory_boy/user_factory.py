@@ -1,11 +1,11 @@
-import factory
+import factory.alchemy
 from blindr.models.user import User
-from tests import Session
+from blindr import db
 
 class UserFactory(factory.alchemy.SQLAlchemyModelFactory):
     class Meta:
         model = User
-        sqlalchemy_session = tests.Session
+        sqlalchemy_session = db.session
 
     id = factory.Sequence(lambda n: n)
 
