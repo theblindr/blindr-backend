@@ -8,9 +8,10 @@ import json
 class DislikeTest(BlindrTest):
 
     def test_post_dislike(self):
-        MatchFactory.mutual_match(
-            self.auth_user,
-            UserFactory(id='user2')
+        MatchFactory(
+            match_from_id=self.auth_user.id,
+            match_to_id=UserFactory(id='user2').id,
+            mutual=True
         )
 
         rv = self.auth_post('/events/dislike', data=dict(dst_user='user2'))
@@ -18,8 +19,7 @@ class DislikeTest(BlindrTest):
         rv_data = json.loads(rv.data.decode('utf-8'))
         self.assert_200(rv)
         self.assertEqual('user2', rv_data['ignore'])
-        self.assertIsNone(Match.query.get(('user1','user2')))
-        self.assertIsNone(Match.query.get(('user2','user1')))
+        self.assertIsNone(Match.query.get((self.auth_user.id,'user2')))
 
     def test_dislike_auth(self):
         rv = self.client.post('/events/dislike', data=dict(dst_user='user2'))

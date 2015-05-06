@@ -13,7 +13,11 @@ class BlindrTest(TestCase):
 
     def setUp(self):
         db.create_all()
-        self.auth_user = UserFactory(id='auth_user')
+        self.auth_user = UserFactory(
+            id='auth_user',
+            fake_name='Foo Bar',
+            real_name='Auth User'
+        )
 
     def tearDown(self):
         db.session.remove()
