@@ -1,29 +1,27 @@
 import itsdangerous
-from flask import request, abort
+from flask import request, abort, current_app
 from functools import wraps
-
-import config
 from blindr.models.user import User
 
 def token_authentication(token):
     if not token:
         return False
 
-    s = itsdangerous.Signer(config.secret)
+    s = itsdangerous.Signer(current_app.config['AUTH_SECRET'])
     user_id = False
     try:
-        user_id = s.unsign(token)
+        user_id = s.unsign(token).decode('utf-8')
     except itsdangerous.BadSignature:
         pass
 
-    return config.session.query(User).filter_by(id=user_id).first()
+    return User.query.get(user_id)
 
 def authenticate(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
         user = token_authentication(request.headers.get('X-User-Token'))
         if user:
-            func.im_self.user = user
+            func.__self__.user = user
             return func(*args, **kwargs)
         abort(401)
     return wrapper

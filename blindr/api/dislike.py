@@ -3,8 +3,7 @@ from .authenticate import authenticate
 from flask import request, abort
 import time
 
-
-import config
+from blindr import db
 from blindr.models.event import Event
 from blindr.models.match import Match
 from blindr.models.user import User
@@ -15,14 +14,14 @@ class Dislike(restful.Resource):
     def post(self):
         # Create DB Match entry
         dst_id = request.form.get('dst_user')
-        session = config.session
 
         # User unliking previously like target. Remove row.
-        session.query(Match).filter(
+        Match.query.filter(
             ((Match.match_from_id == self.user.id) & (Match.match_to_id == dst_id)) |
-            ((Match.match_from_id == dst_id) & (Match.match_to_id == self.user.id))).delete()
+            ((Match.match_from_id == dst_id) & (Match.match_to_id == self.user.id))
+        ).delete()
 
-        session.commit()
+        db.session.commit()
 
         return {'ignore': dst_id}
 
