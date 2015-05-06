@@ -27,6 +27,10 @@ class BlindrTest(TestCase):
         self._add_header_auth_token(kwargs)
         return self.client.post(*args, **kwargs)
 
+    def auth_get(self, *args, **kwargs):
+        self._add_header_auth_token(kwargs)
+        return self.client.get(*args, **kwargs)
+
     def _add_header_auth_token(self, kwargs):
         s = itsdangerous.Signer(self.app.config['AUTH_SECRET'])
         token = s.sign(b'auth_user').decode('utf-8')

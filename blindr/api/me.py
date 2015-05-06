@@ -1,5 +1,5 @@
 from flask.ext import restful
-from . import authenticate
+from .authenticate import authenticate
 
 class Me(restful.Resource):
     method_decorators=[authenticate]
