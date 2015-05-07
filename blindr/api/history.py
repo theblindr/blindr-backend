@@ -8,7 +8,7 @@ class History(restful.Resource):
     method_decorators=[authenticate]
 
     def get(self, other_id):
-        sinceParam = request.args.get('since')
+        sinceParam = int(request.args.get('since'))
         return Event.fetch_history(user= self.user.id,
                                     other= other_id, since= sinceParam)
 
