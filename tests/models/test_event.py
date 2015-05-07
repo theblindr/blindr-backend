@@ -8,16 +8,16 @@ import boto
 from blindr.models.event import Event, events
 
 class EventTests(unittest.TestCase):
+    @freeze_time('2015-01-01')
     def test_create(self):
         events.put_item = MagicMock(return_value = 'put_item_ret')
 
-        with freeze_time('2015-01-01'):
-            event = Event.create({'foo': 'bar'})
-            event_data = events.put_item.call_args[1]['data']
-            self.assertEqual(event, 'put_item_ret')
-            self.assertEqual(event_data['sent_at'], time.time())
-            self.assertIsNotNone(event_data['event_id'])
-            self.assertEqual(event_data['foo'], 'bar')
+        event = Event.create({'foo': 'bar'})
+        event_data = events.put_item.call_args[1]['data']
+        self.assertEqual(event, 'put_item_ret')
+        self.assertEqual(event_data['sent_at'], time.time())
+        self.assertIsNotNone(event_data['event_id'])
+        self.assertEqual(event_data['foo'], 'bar')
 
     def test_fetch_adjust_since(self):
         events.query_2 = MagicMock(return_value = [])

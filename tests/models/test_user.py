@@ -8,6 +8,7 @@ from blindr.models.user import User
 
 class UserTests(BlindrTest):
 
+    @freeze_time('2015-01-01')
     @mock.patch('blindr.models.user.name_generator.generate_name')
     @mock.patch('blindr.models.user.facebook.GraphAPI')
     def test_from_facebook_new_user(self, mock_graphapi, mock_generate_name):
@@ -20,26 +21,26 @@ class UserTests(BlindrTest):
 
         mock_generate_name.return_value = 'Fake Name'
 
-        with freeze_time('2015-01-01'):
-            user = User.query.get('123123')
-            self.assertIsNone(user)
+        user = User.query.get('123123')
+        self.assertIsNone(user)
 
-            User.from_facebook('oauth_234234')
+        User.from_facebook('oauth_234234')
 
-            mock_graphapi.assert_called_with(access_token='oauth_234234')
-            graph_instance.get_object.assert_called_with(id='me')
+        mock_graphapi.assert_called_with(access_token='oauth_234234')
+        graph_instance.get_object.assert_called_with(id='me')
 
-            user = User.query.get('123123')
-            self.assertIsNotNone(user)
+        user = User.query.get('123123')
+        self.assertIsNotNone(user)
 
-            self.assertEqual('123123', user.id)
-            self.assertEqual('oauth_234234', user.OAuth)
-            self.assertEqual('m', user.gender)
-            self.assertEqual(datetime(2015, 1, 1), user.last_poll)
-            self.assertEqual('bob', user.real_name)
-            self.assertEqual('Fake Name', user.fake_name)
-            self.assertEqual('', user.facebook_urls)
+        self.assertEqual('123123', user.id)
+        self.assertEqual('oauth_234234', user.OAuth)
+        self.assertEqual('m', user.gender)
+        self.assertEqual(datetime(2015, 1, 1), user.last_poll)
+        self.assertEqual('bob', user.real_name)
+        self.assertEqual('Fake Name', user.fake_name)
+        self.assertEqual('', user.facebook_urls)
 
+    @freeze_time('2015-01-01')
     @mock.patch('blindr.models.user.facebook.GraphAPI')
     def test_from_facebook_update_user(self, mock_graphapi):
         graph_instance = mock_graphapi.return_value
@@ -57,21 +58,20 @@ class UserTests(BlindrTest):
             real_name='Alice'
         )
 
-        with freeze_time('2015-01-01'):
-            user = User.query.get('123123')
-            self.assertIsNotNone(user)
+        user = User.query.get('123123')
+        self.assertIsNotNone(user)
 
-            User.from_facebook('oauth_234234')
+        User.from_facebook('oauth_234234')
 
-            mock_graphapi.assert_called_with(access_token='oauth_234234')
-            graph_instance.get_object.assert_called_with(id='me')
+        mock_graphapi.assert_called_with(access_token='oauth_234234')
+        graph_instance.get_object.assert_called_with(id='me')
 
-            user = User.query.get('123123')
-            self.assertIsNotNone(user)
+        user = User.query.get('123123')
+        self.assertIsNotNone(user)
 
-            self.assertEqual('123123', user.id)
-            self.assertEqual('oauth_234234', user.OAuth)
-            self.assertEqual('m', user.gender)
-            self.assertEqual(datetime(2015, 1, 1), user.last_poll)
-            self.assertEqual('bob', user.real_name)
+        self.assertEqual('123123', user.id)
+        self.assertEqual('oauth_234234', user.OAuth)
+        self.assertEqual('m', user.gender)
+        self.assertEqual(datetime(2015, 1, 1), user.last_poll)
+        self.assertEqual('bob', user.real_name)
 
