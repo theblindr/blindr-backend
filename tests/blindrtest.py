@@ -1,4 +1,5 @@
 import unittest
+from datetime import datetime
 from blindr import create_app, db
 from flask.ext.testing import TestCase
 from tests.factory_boy.user_factory import UserFactory
@@ -16,7 +17,8 @@ class BlindrTest(TestCase):
         self.auth_user = UserFactory(
             id='auth_user',
             fake_name='Foo Bar',
-            real_name='Auth User'
+            real_name='Auth User',
+            last_poll=datetime(2000,1,1)
         )
 
     def tearDown(self):

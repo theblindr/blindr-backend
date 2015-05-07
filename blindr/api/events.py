@@ -5,8 +5,7 @@ from datetime import datetime
 import time
 
 from blindr.models.event import Event
-import blindr.utils
-import config
+from blindr import db, utils
 
 class Events(restful.Resource):
     method_decorators=[authenticate]
@@ -26,8 +25,8 @@ class Events(restful.Resource):
             events = sorted(events, key=lambda e: e['sent_at'])
 
         self.user.last_poll = datetime.utcnow()
-        config.session.commit()
+        db.session.commit()
 
         events = filter(lambda e: e['src'] != self.user.id, events)
 
-        return events
+        return list(events)
