@@ -14,14 +14,14 @@ class Like(restful.Resource):
     method_decorators=[authenticate]
 
     def get(self):
-        matches = config.session.query(Match).filter(
+        matches = Match.query.filter(
             (Match.match_from_id == self.user.id) |
             ((Match.match_to_id == self.user.id) & (Match.mutual == True))).all()
 
         match_list = []
         for match in matches:
-            other_id = match.match_to_id if match.match_from_id == self.user.id else match.match_from_id,
-            other = config.session.query(User).filter(User.id==other_id).first()
+            other_id = match.match_to_id if match.match_from_id == self.user.id else match.match_from_id
+            other = User.query.filter(User.id==other_id).first()
             match_data = {
                 'other': other.id,
                 'other_fake_name': other.fake_name,

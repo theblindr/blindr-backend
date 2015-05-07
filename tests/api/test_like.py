@@ -58,6 +58,56 @@ class LikeTest(BlindrTest):
         rv = self.auth_post('/events/like', data=dict(dst_user='foobar'))
         self.assert_status(rv, 422)
 
+    def test_get_like_from_user(self):
+        MatchFactory(
+            match_from_id=self.auth_user.id,
+            match_to_id=UserFactory(id='user2').id,
+            mutual=False
+        )
+
+        rv = self.auth_get('/events/like')
+        self.assert_200(rv)
+        rv_data = json.loads(rv.data.decode('utf-8'))[0]
+
+        self.assertEqual(rv_data, {
+            'other': 'user2',
+            'other_fake_name': 'Fakename',
+            'mutual': False
+        })
+
+        self.assertNotIn('other_real_name', rv_data)
+
+    def test_get_like_mutual_like_to_user(self):
+        MatchFactory(
+            match_from_id=UserFactory(id='user2').id,
+            match_to_id=self.auth_user.id,
+            mutual=True
+        )
+
+        rv = self.auth_get('/events/like')
+        self.assert_200(rv)
+        rv_data = json.loads(rv.data.decode('utf-8'))[0]
+
+        self.assertEqual(rv_data, {
+            'other': 'user2',
+            'other_fake_name': 'Fakename',
+            'other_real_name': 'Realname',
+            'mutual': True
+        })
+
+    def test_get_like_non_mutual_like_to_user(self):
+        MatchFactory(
+            match_from_id=UserFactory(id='user2').id,
+            match_to_id=self.auth_user.id,
+            mutual=False
+        )
+
+        rv = self.auth_get('/events/like')
+        self.assert_200(rv)
+        rv_data = json.loads(rv.data.decode('utf-8'))
+
+        self.assertEqual(0, len(rv_data))
+
     def test_like_auth(self):
         rv = self.client.post('/events/like', data=dict(dst_user='user2'))
         self.assert_401(rv)
