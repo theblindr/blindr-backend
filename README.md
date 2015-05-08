@@ -1,5 +1,5 @@
 # blindr-backend
-Backend for [blindr](https://github.com/ldionmarcil/blindr).
+Backend for [blindr](https://github.com/theblindr/blindr).
 Developped in 24h for the [McHacks](http://mchacks.io/) hackathon by [@TyMarc](https://github.com/TyMarc), [@jerome-gingras](https://github.com/jerome-gingras), [@ldionmarcil](https://github.com/ldionmarcil) and [@isra17](https://github.com/isra17).
 
 ## Features
@@ -13,9 +13,15 @@ Developped in 24h for the [McHacks](http://mchacks.io/) hackathon by [@TyMarc](h
  * Run on Heroku
 
 ## Setup
+Requires Python 3
 
-1. Create DynamoDB table with same schema as `models/events`
-2. Install and Setup Boto https://github.com/boto/boto#getting-started-with-boto
-3. Set the database connection string with `export DATABASE_URL={YOUR_CONNECTION_STRING}`
-4. Create SQL table with `python database/setup.py`
-5. Run the app with `foreman start`
+1. Install dependancies `pip install -r requirements.txt`
+2. Create DynamoDB table with same schema as `blindr/models/events`
+3. Install and Setup Boto https://github.com/boto/boto#getting-started-with-boto
+4. Set the database connection string with `export DATABASE_URL={YOUR_CONNECTION_STRING}`
+5. Create SQL table with `./setup.py`
+6. Run the app with `foreman start`
+
+## Debug
+
+Open a shell with the loaded environment: `./shell.py`
