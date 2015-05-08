@@ -10,7 +10,14 @@ events = Table('blindr_events', schema=[
 ], throughput={
     'read': 1,
     'write': 1
-}, global_indexes=[])
+}, global_indexes=[
+    GlobalAllIndex('participants-index', parts=[
+        HashKey('participants')
+    ], throughput={
+        'read':1,
+        'write':1
+    })
+])
 
 class Event(object):
 
