@@ -1,1 +1,1 @@
-web: gunicorn server:blindr --log-file=-
+web: gunicorn blindr:create_app --log-file=-
