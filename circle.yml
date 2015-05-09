@@ -9,5 +9,5 @@ test:
 deployment:
   staging:
     branch: master
-      heroku:
-        appname: blindr-backend
+    heroku:
+      appname: blindr-backend
