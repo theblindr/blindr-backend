@@ -1,5 +1,5 @@
 from flask.ext import restful
-from .authenticate import authenticate
+from blindr.common.authenticate import authenticate
 
 class Me(restful.Resource):
     method_decorators=[authenticate]

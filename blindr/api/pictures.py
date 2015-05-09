@@ -1,6 +1,6 @@
 from flask.ext import restful
 from flask import request, abort
-from .authenticate import authenticate
+from blindr.common.authenticate import authenticate
 import facebook
 
 from blindr.models.event import Event

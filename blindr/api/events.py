@@ -1,5 +1,5 @@
 from flask.ext import restful
-from .authenticate import authenticate
+from blindr.common.authenticate import authenticate
 from flask import request, abort
 from datetime import datetime
 import time
