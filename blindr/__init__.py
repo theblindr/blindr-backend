@@ -1,9 +1,6 @@
 from flask import Flask, request, abort
 from flask.ext.sqlalchemy import SQLAlchemy
 
-import boto
-boto.config.load_from_path('./boto.cfg')
-
 db = SQLAlchemy()
 
 def create_app(config):
