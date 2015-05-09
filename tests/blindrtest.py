@@ -4,10 +4,11 @@ from blindr import create_app, db
 from flask.ext.testing import TestCase
 from tests.factory_boy.user_factory import UserFactory
 import itsdangerous
+import config.test
 
 class BlindrTest(TestCase):
     def create_app(self):
-        return create_app('config.test')
+        return create_app(config.test)
 
     def setUp(self):
         db.create_all()
