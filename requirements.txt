@@ -1,12 +1,13 @@
 aniso8601==0.92
 boto==2.38.0
--e git://github.com/pythonforfacebook/facebook-sdk.git@9160d729185c8fb5380e9954af200cf8a329f9fa#egg=facebook_sdk-master
+-e git://github.com/pythonforfacebook/facebook-sdk.git@9160d729185c8fb5380e9954af200cf8a329f9fa#egg=facebook_sdk-dev
 factory-boy==2.5.2
 Flask==0.10.1
 Flask-RESTful==0.3.2
 Flask-SQLAlchemy==2.0
 Flask-Testing==0.4.2
 freezegun==0.3.3
+gunicorn==19.3.0
 itsdangerous==0.24
 Jinja2==2.7.3
 MarkupSafe==0.23
