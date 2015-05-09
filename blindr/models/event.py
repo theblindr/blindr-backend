@@ -58,7 +58,5 @@ class Event(object):
         for item in items:
             item['sent_at'] = float(item['sent_at'])
 
-        items = filter(lambda e: e['sent_at'] > since, items)
-
         return list(items)
 
