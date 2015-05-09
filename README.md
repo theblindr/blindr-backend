@@ -1,3 +1,5 @@
+[![Circle CI](https://circleci.com/gh/theblindr/blindr-backend.svg?style=svg)](https://circleci.com/gh/theblindr/blindr-backend)
+
 # blindr-backend
 Backend for [blindr](https://github.com/theblindr/blindr).
 Developped in 24h for the [McHacks](http://mchacks.io/) hackathon by [@TyMarc](https://github.com/TyMarc), [@jerome-gingras](https://github.com/jerome-gingras), [@ldionmarcil](https://github.com/ldionmarcil) and [@isra17](https://github.com/isra17).
