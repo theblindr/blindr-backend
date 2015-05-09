@@ -1,0 +1,13 @@
+machine:
+  python:
+    version: 3.4.2
+
+test:
+  override:
+    python -m unittest discover -s tests -v
+
+deployment:
+  staging:
+    branch: master
+      heroku:
+        appname: blindr-backend
