@@ -6,11 +6,8 @@ from tests.factory_boy.user_factory import UserFactory
 import itsdangerous
 
 class BlindrTest(TestCase):
-    SQLALCHEMY_DATABASE_URI = "sqlite://"
-    TESTING = True
-
     def create_app(self):
-        return create_app(self)
+        return create_app('config.test')
 
     def setUp(self):
         db.create_all()
