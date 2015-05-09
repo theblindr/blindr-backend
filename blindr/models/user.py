@@ -1,7 +1,7 @@
 import facebook
 from datetime import datetime
 from blindr import db
-from blindr import name_generator
+from blindr.common import name_generator
 
 _fb_gender_map = {
     'male': 'm',

@@ -5,7 +5,8 @@ from datetime import datetime
 import time
 
 from blindr.models.event import Event
-from blindr import db, utils
+from blindr import db
+from blindr.common import utils
 
 class Events(restful.Resource):
     method_decorators=[authenticate]

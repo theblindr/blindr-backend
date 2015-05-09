@@ -60,5 +60,5 @@ class Event(object):
 
         items = filter(lambda e: e['sent_at'] > since, items)
 
-        return items
+        return list(items)
 
