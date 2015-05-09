@@ -1,15 +1,12 @@
 from flask.ext import restful
+from flask import request, abort
 from .authenticate import authenticate
-from flask import request, abort, jsonify
-import time
-from itertools import permutations
-from sqlalchemy.exc import IntegrityError
 import facebook
 
-import config
 from blindr.models.event import Event
 from blindr.models.user import User
 from blindr.models.match import Match
+from blindr import db
 
 class Pictures(restful.Resource):
     method_decorators=[authenticate]
@@ -19,8 +16,7 @@ class Pictures(restful.Resource):
 
         if typeReq == 'slideshow':
             dst_id = request.args.get('dst_id')
-            user = config.session.query(User).filter(
-                User.id==dst_id)
+            user = User.query.get(dst_id)
             if user:
                 return user.facebook_urls.split(",")
             else:
