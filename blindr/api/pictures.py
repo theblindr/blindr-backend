@@ -35,7 +35,7 @@ class Pictures(restful.Resource):
     def post(self):
         facebookUrls = request.form.get('facebookUrls')
 		
-        self.user.update({'facebook_urls' = facebookUrls})
+        self.user.update({'facebook_urls' : facebookUrls})
         try:
             db.session.commit()
         except IntegrityError:
