@@ -17,6 +17,7 @@ class User(db.Model):
     fake_name =	db.Column(db.String(50), nullable = False)
     real_name =	db.Column(db.String(50))
     gender =	db.Column(db.CHAR, nullable = False)
+    looking_for = db.Column(db.String)
     last_poll =	db.Column(db.TIMESTAMP)
     facebook_urls = db.Column(db.String)
 
@@ -35,7 +36,8 @@ class User(db.Model):
                     real_name= fb_user['name'],
                     gender= _fb_gender_map[fb_user['gender'] or 'male'],
                     last_poll= datetime.utcnow(),
-                    facebook_urls= "")
+                    facebook_urls= "",
+                    looking_for="")
 
             session.add(user)
 
