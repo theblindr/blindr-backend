@@ -52,7 +52,7 @@ class Event(object):
         resultset = events.query_2(
             participants__eq= '{}:{}'.format(*sorted([user,other])),
             index= 'participants-index',
-            sent_at__gte=since)
+            sent_at__gt=since)
 
         items = [dict(item) for item in resultset]
         for item in items:

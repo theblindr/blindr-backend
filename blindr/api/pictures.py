@@ -12,23 +12,10 @@ class Pictures(restful.Resource):
     method_decorators=[authenticate]
 
     def get(self):
-        typeReq = request.args.get('typeReq')
-
-        if typeReq == 'slideshow':
-            dst_id = request.args.get('dst_id')
-            user = User.query.get(dst_id)
-            if user:
-                return user.facebook_urls.split(",")
-            else:
-                abort(500)
-        elif typeReq == 'all':
-            facebook.GraphAPI(self.user.OAuth)
-            graph = facebook.GraphAPI(self.user.OAuth)
-            target_user_albums = graph.get_connections(self.user.id, 'albums')['data']
-            profile_pictures_album = target_user_albums[0]
-            profile_picture_album_id = profile_pictures_album['id']
-            urls = [x['images'][0]['source'] for x in graph.get_connections(profile_picture_album_id, 'photos')['data']]
-            return urls
+        dst_id = request.args.get('dst_id')
+        user = User.query.get(dst_id)
+        if user:
+            return user.facebook_urls.split(",")
         else:
             abort(500)
 			
