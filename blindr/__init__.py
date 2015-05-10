@@ -1,3 +1,4 @@
+import logging
 from flask import Flask, request, abort
 from flask.ext.sqlalchemy import SQLAlchemy
 from blindr.plugins import rollbar
@@ -18,6 +19,8 @@ def create_app(config=None):
 
     from blindr.api import Api
     Api(app)
+
+    logging.info('App created')
 
     return app
 
