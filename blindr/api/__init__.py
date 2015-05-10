@@ -1,5 +1,5 @@
 from flask.ext import restful
-from . import me, auth, events, message, like, dislike, pictures, history
+from . import me, auth, events, message, like, dislike, pictures, history, interests
 
 def Api(app):
     api = restful.Api(app)
@@ -12,4 +12,5 @@ def Api(app):
     api.add_resource(like.Like, '/events/like')
     api.add_resource(dislike.Dislike, '/events/dislike')
     api.add_resource(history.History, '/events/<string:other_id>')
+    api.add_resource(interests.Interests, '/interests')
 
