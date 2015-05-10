@@ -11,5 +11,5 @@ class Auth(restful.Resource):
             abort(401)
 
         s = itsdangerous.Signer(current_app.config['AUTH_SECRET'])
-        return {'token': s.sign(user.id.encode()).decode('utf-8')}
+        return {'token': s.sign(user.id.encode()).decode('utf-8'), "fake_name": user.fake_name}
 
