@@ -31,6 +31,15 @@ class Pictures(restful.Resource):
             return urls
         else:
             abort(500)
+			
+	def post(self):
+	    facebookUrls = request.args.get('facebookUrls')
+		
+		self.user.update({'facebook_urls' = facebookUrls})
+		try:
+		    db.session.commit()
+	    except IntegrityError:
+		    abort(500)	
 
 
 
