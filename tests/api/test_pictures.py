@@ -5,8 +5,6 @@ import json
 
 class PicturesTest(BlindrTest):
 
-    @mock.patch('blindr.models.user.facebook.GraphAPI')
-
     def test_get_slideshow(self):
         UserFactory(
             id='user2',
