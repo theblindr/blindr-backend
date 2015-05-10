@@ -1,4 +1,5 @@
 from flask import Request, got_request_exception
+import logging
 import rollbar.contrib.flask
 import rollbar
 
@@ -14,3 +15,5 @@ def init_rollbar(app):
             )
 
             got_request_exception.connect(rollbar.contrib.flask.report_exception, app)
+
+            logging.info('Initialized rollbar...')
