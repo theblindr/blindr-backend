@@ -14,7 +14,7 @@ def init_rollbar(app):
             root=os.path.dirname(os.path.realpath(blindr.__file__)),
             allow_logging_basic_config=False,
             exception_level_filters=[
-                (werkzeug.exceptions, 'warning'),
+                (werkzeug.exceptions.HTTPException, 'warning'),
             ]
         )
 
