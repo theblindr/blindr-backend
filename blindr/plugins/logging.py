@@ -1,4 +1,4 @@
-from logentries
+import logentries
 import logging
 
 def init_logging(app):
