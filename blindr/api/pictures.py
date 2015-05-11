@@ -17,17 +17,14 @@ class Pictures(restful.Resource):
         if user:
             return user.facebook_urls.split(",")
         else:
-            abort(500)
-			
+            abort(422)
+
     def post(self):
         facebookUrls = request.form.get('facebookUrls')
-		
+
         self.user.facebook_urls = facebookUrls
-        try:
-            db.session.commit()
-        except IntegrityError:
-            abort(500)
-	
+        db.session.commit()
+
         return jsonify(status="ok")
 
 

@@ -70,10 +70,6 @@ class Like(restful.Resource):
             match = Match(match_from_id= self.user.id, match_to_id= dst_id)
             db.session.add(match)
 
-
-        try:
-            db.session.commit()
-        except IntegrityError:
-            abort(500)
+        db.session.commit()
 
         return jsonify(status="ok")
