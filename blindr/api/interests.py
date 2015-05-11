@@ -18,5 +18,3 @@ class Interests(restful.Resource):
 
         return {}
 
-
-

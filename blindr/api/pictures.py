@@ -15,7 +15,7 @@ class Pictures(restful.Resource):
         dst_id = request.args.get('dst_id')
         user = User.query.get(dst_id)
         if user:
-            return user.facebook_urls.split(",")
+            return user.facebook_urls.split(",") if user.facebook_urls else []
         else:
             abort(422)
 
