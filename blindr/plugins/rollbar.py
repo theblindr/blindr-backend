@@ -1,4 +1,5 @@
 from flask import Request, got_request_exception
+import blindr
 import rollbar.contrib.flask
 import rollbar
 import os
@@ -8,7 +9,7 @@ def init_rollbar(app):
         rollbar.init(
             app.config['ROLLBAR_ACCESS_TOKEN'],
             app.config['ENV'],
-            root=os.path.dirname(os.path.realpath(__file__)),
+            root=os.path.dirname(os.path.realpath(blindr.__file__)),
             allow_logging_basic_config=False
         )
 
