@@ -25,7 +25,5 @@ class Pictures(restful.Resource):
         self.user.facebook_urls = facebookUrls
         db.session.commit()
 
-        return jsonify(status="ok")
-
-
+        return {}
 

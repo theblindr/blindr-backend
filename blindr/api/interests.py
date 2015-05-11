@@ -16,7 +16,7 @@ class Interests(restful.Resource):
         self.user.looking_for = interested_in
         db.session.commit()
 
-        return jsonify(status="ok")
+        return {}
 
 
 
