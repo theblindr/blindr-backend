@@ -1,6 +1,7 @@
 from flask import Request, got_request_exception
 import rollbar.contrib.flask
 import rollbar
+import os
 
 def init_rollbar(app):
     if 'ROLLBAR_ACCESS_TOKEN' in app.config:
