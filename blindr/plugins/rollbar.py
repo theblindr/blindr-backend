@@ -13,4 +13,6 @@ def init_rollbar(app):
 
         got_request_exception.connect(rollbar.contrib.flask.report_exception, app)
 
-        app.logger.info('Initialized rollbar...')
+        app.logger.info('[rollbar.init_rollbar] Rollbar enabled')
+    else:
+        app.logger.info('[rollbar.init_rollbar] Rollbar disabled')
