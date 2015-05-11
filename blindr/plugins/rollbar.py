@@ -3,7 +3,7 @@ import rollbar.contrib.flask
 import rollbar
 
 def init_rollbar(app):
-    if 'ROLLBAR_TOKEN' in app.config:
+    if 'ROLLBAR_ACCESS_TOKEN' in app.config:
         rollbar.init(
             app.config['ROLLBAR_ACCESS_TOKEN'],
             app.config['ENV'],

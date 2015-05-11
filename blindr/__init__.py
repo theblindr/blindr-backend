@@ -21,7 +21,7 @@ def create_app(config=None):
     from blindr.api import Api
     Api(app)
 
-    app.logger.info('App created')
+    app.logger.info('[blindr] App created')
 
     return app
 

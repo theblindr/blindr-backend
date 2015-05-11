@@ -1,5 +1,5 @@
 from flask.ext import restful
-from . import me, auth, events, message, like, dislike, pictures, history, interests
+from blindr.api import me, auth, events, message, like, dislike, pictures, history, interests, foobar
 
 def Api(app):
     api = restful.Api(app)
@@ -13,4 +13,7 @@ def Api(app):
     api.add_resource(dislike.Dislike, '/events/dislike')
     api.add_resource(history.History, '/events/<string:other_id>')
     api.add_resource(interests.Interests, '/interests')
+
+    # test
+    api.add_resource(foobar.Foobar, '/foobar')
 
