@@ -1,0 +1,5 @@
+-r common.txt
+factory-boy==2.5.2
+Flask-Testing==0.4.2
+freezegun==0.3.3
+python-dateutil==2.4.2

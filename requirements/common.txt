@@ -1,0 +1,15 @@
+-e git://github.com/pythonforfacebook/facebook-sdk.git@9160d729185c8fb5380e9954af200cf8a329f9fa#egg=facebook_sdk-master
+boto==2.38.0
+Flask-RESTful==0.3.2
+Flask-SQLAlchemy==2.0
+Flask==0.10.1
+gunicorn==19.3.0
+itsdangerous==0.24
+SQLAlchemy==1.0.3
+aniso8601==0.92
+Jinja2==2.7.3
+MarkupSafe==0.23
+pytz==2015.2
+requests==2.7.0
+six==1.9.0
+Werkzeug==0.10.4
