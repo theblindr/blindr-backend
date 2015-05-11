@@ -1,13 +1,14 @@
 from flask import Request, got_request_exception
 import blindr
-import rollbar.contrib.flask
-import rollbar
 import os
 
 import werkzeug.exceptions
 
 def init_rollbar(app):
     if 'ROLLBAR_ACCESS_TOKEN' in app.config:
+        import rollbar.contrib.flask
+        import rollbar
+
         rollbar.init(
             app.config['ROLLBAR_ACCESS_TOKEN'],
             app.config['ENV'],

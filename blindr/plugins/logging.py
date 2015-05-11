@@ -1,5 +1,6 @@
 import logging
 
 def init_logging(app):
-    app.logger.addHandler(logging.StreamHandler())
-    app.logger.setLevel(logging.INFO)
+    if app.config['LOGGING_ENABLED']:
+        app.logger.addHandler(logging.StreamHandler())
+        app.logger.setLevel(app.config['LOGGING_LEVEL'])
