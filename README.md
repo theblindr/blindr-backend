@@ -15,7 +15,7 @@ Developped in 24h for the [McHacks](http://mchacks.io/) hackathon by [@TyMarc](h
 
 ## Setting the environment
 1. Ensure Python 3, pip and virtualenv are installed
-2. Enter your AWS credentials in `./instance/boto.cfg`
+2. Enter your [AWS credentials](https://console.aws.amazon.com/iam/home) in `./instance/boto.cfg`
 3. Create a virtual env: `virtualenv -p python3 venv`
 4. Source the virtualenv: `source ./venv/bin/activate`
 5. Install the dependancies: `pip install -r requirements/development.txt`
