@@ -1,12 +1,13 @@
 from boto.dynamodb2.table import Table
 from boto.dynamodb2.fields import HashKey, RangeKey, GlobalAllIndex
+from boto.dynamodb2.types import NUMBER
 import uuid
 import time
 from datetime import timedelta
 
 events = Table('blindr_events', schema=[
     HashKey('dst'),
-    RangeKey('sent_at')
+    RangeKey('sent_at', data_type=NUMBER)
 ], throughput={
     'read': 1,
     'write': 1

@@ -8,6 +8,7 @@ from pprint import pprint
 from flask import *
 
 sys.path.append('.')
+os.environ['PYTHONINSPECT'] = 'True'
 from blindr import *
 
-os.environ['PYTHONINSPECT'] = 'True'
+app = create_app()

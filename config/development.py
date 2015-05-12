@@ -3,11 +3,10 @@ import logging
 DEBUG = True
 SQLALCHEMY_ECHO = True
 
-LOGGING_ENABLED = True
-LOGGING_LEVEL = logging.DEBUG
+LOGGING_ENABLED = False
 
 SQLALCHEMY_DATABASE_URI = 'sqlite:///instance/blindr.db'
 
 import boto
-boto.config.load_credential_file('./boto.cfg')
+boto.config.load_from_path('instance/boto.cfg')
 
