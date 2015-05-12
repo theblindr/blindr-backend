@@ -1,6 +1,10 @@
 #!/usr/bin/env python
-from blindr import create_app
-import config
+import sys
+import os
+sys.path.append(os.path.join(os.path.dirname(__file__), os.path.pardir))
+os.chdir(os.path.join(os.path.dirname(__file__), os.path.pardir))
+os.environ.setdefault('ENV','development')
 
-app = create_app(config)
+from blindr import create_app
+app = create_app()
 app.run()
