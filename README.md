@@ -29,5 +29,9 @@ Developped in 24h for the [McHacks](http://mchacks.io/) hackathon by [@TyMarc](h
 1. Pull changes: `git pull`
 2. Update pip requirements: `pip install -r requirements/development.txt`
 
+## Running tests
+* To run all tests: `python -m unittest discover`
+* To run a single test case: `python -m unittest tests.models.test_user`
+
 ## Other tools
  - Open a shell with the loaded environment: `./bin/shell.py`
