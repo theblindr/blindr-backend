@@ -1,3 +1,4 @@
+ENV='test'
 SQLALCHEMY_DATABASE_URI = "sqlite://"
 TESTING = True
 
