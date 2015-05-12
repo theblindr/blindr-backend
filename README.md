@@ -14,16 +14,15 @@ Developped in 24h for the [McHacks](http://mchacks.io/) hackathon by [@TyMarc](h
  * Store users and matches in Postgres
  * Run on Heroku
 
-## Setup
-Requires Python 3
+## Run on dev
+1. Ensure Python 3, pip and virtualenv are installed
+2. Set the values in `./config/local.py`
+3. Run the setup script: `./bin/setup`
+4. Start the app with `ENV=debug ./bin/run`
 
-1. Install dependancies `pip install -r requirements.txt`
-2. Create DynamoDB table with same schema as `blindr/models/events`
-3. Install and Setup Boto https://github.com/boto/boto#getting-started-with-boto
-4. Set the database connection string with `export DATABASE_URL={YOUR_CONNECTION_STRING}`
-5. Create SQL table with `./setup.py`
-6. Run the app with `foreman start`
+## Update
+1. Pull changes: `git pull`
+2. Update pip requirements: `pip install -r requirements.txt`
 
-## Debug
-
-Open a shell with the loaded environment: `./shell.py`
+## Other tools
+ - Open a shell with the loaded environment: `./shell.py`
