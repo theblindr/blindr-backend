@@ -5,4 +5,4 @@ source ./venv/bin/activate
 
 pip install -r requirements/development.txt
 
-./setup_db
+./create_db
