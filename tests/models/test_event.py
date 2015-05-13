@@ -56,6 +56,15 @@ class EventTests(unittest.TestCase):
         participants = events.query_2.call_args[1]['participants__eq']
         self.assertEqual('123:321', participants)
 
+    def test_fetch_history_since(self):
+        events.query_2 = MagicMock(return_value = [])
+
+        Event.fetch_history('123','456', since=12300)
+        events.query_2.assert_called_with(
+                participants__eq='123:456',
+                sent_at__gte=12300,
+                index='participants-index')
+
     def test_fetch_history_float_sent_at(self):
         events.query_2 = MagicMock(return_value = [{'sent_at':'1.23'}])
         event = Event.fetch_history('123','321')[0]
