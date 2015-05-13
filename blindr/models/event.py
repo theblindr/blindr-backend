@@ -5,18 +5,22 @@ import uuid
 import time
 from datetime import timedelta
 
+# Indexes must support 2 query type:
+#  * Query events to a user since last poll
+#  * Query all message between two user
 events = Table('blindr_events', schema=[
     HashKey('dst'),
     RangeKey('sent_at', data_type=NUMBER)
 ], throughput={
-    'read': 1,
-    'write': 1
+    'read': 10,
+    'write': 10
 }, global_indexes=[
     GlobalAllIndex('participants-index', parts=[
-        HashKey('participants')
+        HashKey('participants'),
+        RangeKey('sent_at', data_type=NUMBER)
     ], throughput={
-        'read':1,
-        'write':1
+        'read':10,
+        'write':10
     })
 ])
 
